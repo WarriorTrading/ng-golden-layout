@@ -8,72 +8,40 @@ import {
   GoldenLayoutConfiguration,
   MultiWindowService,
 } from '@embedded-enterprises/ng6-golden-layout';
-
-@MultiWindowService<TestService>()
-@Injectable()
-export class TestService {
-  public id: string;
-  constructor() {
-    this.id = '_' + Math.random().toString(36).substr(2, 9);
-    console.log(`Creating testService, id: ${this.id}`);
-  }
-}
+import { RoomlistComponent } from './roomlist/roomlist.component';
+import { RoomComponent } from './room/room.component';
 
 @Component({
   template: `<div class="spawn-new"></div><golden-layout-root></golden-layout-root>`,
   selector: `app-root`,
 })
 export class RootComponent {
-  // test delayed component construction
-  constructor(private srv: GoldenLayoutService) {
-    setTimeout(() => {
-      srv.createNewComponent(srv.getRegisteredComponents()[1]);
-    }, 1000);
+  constructor() {
   }
-
-}
-@Component({
-  template: `<h1>Test</h1><span>{{test.id}}</span>`,
-  selector: `app-test`,
-})
-export class TestComponent {
-  constructor(public test: TestService) { }
-
-}
-@Component({
-  template: `<h1>Test2</h1>`,
-  selector: `app-tested`,
-})
-export class TestedComponent {
-  constructor() { }
-
 }
 
 const config: GoldenLayoutConfiguration = {
   components: [
     {
-      component: TestComponent,
-      componentName: 'app-test'
+      component: RoomlistComponent,
+      componentName: 'roomlist',
     },
     {
-      component: TestedComponent,
-      componentName: 'app-tested',
-    },
+      component: RoomComponent,
+      componentName: 'room',
+    }
   ],
   defaultLayout: {
     content: [
       {
         type: "row",
+        isClosable: false,
         content: [
           {
             type: 'component',
-            componentName: 'app-test',
-            title: 'Test 1',
-          },
-          {
-            type: 'component',
-            componentName: 'app-test',
-            title: 'Test 2',
+            componentName: 'roomlist',
+            id: "app-roomlist",
+            title: 'roomlist'
           }
         ]
       }
@@ -82,14 +50,14 @@ const config: GoldenLayoutConfiguration = {
 }
 
 @NgModule({
-  declarations: [RootComponent, TestComponent, TestedComponent],
-  entryComponents: [TestComponent, TestedComponent],
+  declarations: [RootComponent, RoomlistComponent, RoomComponent],
+  entryComponents: [RoomlistComponent, RoomComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     GoldenLayoutModule.forRoot(config),
   ],
-  providers: [TestService],
+  providers: [GoldenLayoutService],
   bootstrap: [RootComponent]
 })
 export class AppModule { }

@@ -60,36 +60,62 @@ export class GoldenLayoutService {
     return this.config.components;
   }
 
-  public createNewComponent(comp: ComponentConfiguration) {
-    // create content item
-    const content = this._layout.createContentItem({type: 'component', componentName: comp.componentName }) as any;
-    // search for the first lm-stack (a stack should be there always.)
-    const root = this._layout.root;
-    let element: GoldenLayout.ContentItem = null;
-    if (!root.contentItems || root.contentItems.length === 0) {
-      element = root;
-    } else {
-      element = this.findStack(root.contentItems);
+  public getRegisteredComponent(name: string): ComponentConfiguration {
+    for (let index = 0; index < this.config.components.length; index++) {
+      const component = this.config.components[index];
+      console.log(component.componentName, name, component.componentName === name);
+      if (component.componentName === name) {
+        return component;
+      }
     }
-    if (element === null) {
-      throw new Error("this should never happen!");
-    }
-    element.addChild(content);
+    return null;
   }
 
-  private findStack(contentItems: GoldenLayout.ContentItem[]): GoldenLayout.ContentItem {
-    if (!contentItems) {
-      return null;
+  public childOfRoot(): GoldenLayout.ContentItem {
+    if (this._layout == null || this._layout.root == null || this._layout.root.contentItems == null || this._layout.root.contentItems.length === 0) {
+      throw new Error("no child in root ");
     }
-    for (const x of contentItems) {
-      if (x.type === 'stack') {
-        return x;
-      }
-      const s = this.findStack(x.contentItems);
-      if (s !== null) {
-        return s;
-      }
+    console.log(this._layout.root.contentItems);
+    return this._layout.root.contentItems[0];
+  }
+
+  public addStack(parent: GoldenLayout.ContentItem, opt?: GoldenLayout.ItemConfig): GoldenLayout.ContentItem {
+    
+    if (parent == null) {
+      throw new Error("cannot add stack to null item");
     }
+
+    if (opt != null && opt.id != null && parent.getItemsById(opt.id).length > 0) {
+      throw new Error(`there already exists a item with same id: ${opt.id} in parent!`);
+    }
+    
+    // create stack item
+    const stack = this._layout.createContentItem(Object.assign({type: 'stack'}, opt as any)) as any;
+
+    parent.addChild(stack);
+    return stack;
+  }
+
+  public addComponent(parent: GoldenLayout.ContentItem, comp: ComponentConfiguration, opt?: GoldenLayout.ItemConfig) : GoldenLayout.ContentItem {
+    
+    if (parent == null) {
+      throw new Error("cannot add component to null item");
+    }
+
+    if (opt != null && opt.id != null && parent.getItemsById(opt.id).length > 0) {
+      throw new Error(`there already exists a item with same id: ${opt.id} in parent!`);
+    }
+
+    // create content item
+    const content = this._layout.createContentItem(Object.assign({type: 'component', componentName: comp.componentName }, opt as any)) as any;
+
+    parent.addChild(content);
+
+    return content;
+  }
+
+  public currentConfig(): string {
+    return JSON.stringify(this._layout.toConfig(), null, 2)
   }
 
   public isChildWindow(): boolean {
