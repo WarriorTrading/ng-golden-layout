@@ -63,7 +63,6 @@ export class GoldenLayoutService {
   public getRegisteredComponent(name: string): ComponentConfiguration {
     for (let index = 0; index < this.config.components.length; index++) {
       const component = this.config.components[index];
-      console.log(component.componentName, name, component.componentName === name);
       if (component.componentName === name) {
         return component;
       }
@@ -75,7 +74,6 @@ export class GoldenLayoutService {
     if (this._layout == null || this._layout.root == null || this._layout.root.contentItems == null || this._layout.root.contentItems.length === 0) {
       throw new Error("no child in root ");
     }
-    console.log(this._layout.root.contentItems);
     return this._layout.root.contentItems[0];
   }
 
