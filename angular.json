@@ -133,36 +133,36 @@
         }
       }
     },
-    "ee-golden-layout": {
-      "root": "projects/ee-golden-layout",
+    "ng-golden-layout": {
+      "root": "projects/ng-golden-layout",
       "projectType": "library",
       "prefix": "golden-layout",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "project": "projects/ee-golden-layout/ng-package.json"
+            "project": "projects/ng-golden-layout/ng-package.json"
           },
           "configurations": {
             "production": {
-              "project": "projects/ee-golden-layout/ng-package.prod.json"
+              "project": "projects/ng-golden-layout/ng-package.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/ee-golden-layout/src/test.ts",
-            "tsConfig": "projects/ee-golden-layout/tsconfig.spec.json",
-            "karmaConfig": "projects/ee-golden-layout/karma.conf.js"
+            "main": "projects/ng-golden-layout/src/test.ts",
+            "tsConfig": "projects/ng-golden-layout/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-golden-layout/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/ee-golden-layout/tsconfig.lint.json",
-              "projects/ee-golden-layout/tsconfig.spec.json"
+              "projects/ng-golden-layout/tsconfig.lint.json",
+              "projects/ng-golden-layout/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"

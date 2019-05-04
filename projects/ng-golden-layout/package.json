@@ -1,11 +1,11 @@
 {
-  "name": "@embedded-enterprises/ng6-golden-layout",
-  "version": "0.0.7",
+  "name": "@warriortrading/ng-golden-layout",
+  "version": "0.0.1",
   "license": "BSD-3-Clause",
   "author": {
-    "name": "Martin Koppehel",
-    "email": "mkoppehel@embedded.enterprises",
-    "url": "https://embedded.enterprises"
+    "name": "",
+    "email": "barry@warriortrading.com",
+    "url": "https://www.warriortrading.com"
   },
   "peerDependencies": {
     "@angular/common": "^6.0.0",

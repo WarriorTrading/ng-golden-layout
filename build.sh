@@ -1,11 +1,11 @@
 #!/bin/bash -e
 
-ORG="@embedded-enterprises"
-PKG="ng6-golden-layout"
+ORG="@warriortrading"
+PKG="ng-golden-layout"
 
 echo "This scripts builds the projects."
 echo "Building $ORG/$PKG"
-ng build ee-golden-layout
+ng build ng-golden-layout
 echo "Copying readme"
 cp README.md dist/$ORG/$PKG
 echo "Repacking lib"

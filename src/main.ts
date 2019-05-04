@@ -3,7 +3,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
-import { MultiWindowInit } from '@embedded-enterprises/ng6-golden-layout';
+import { MultiWindowInit } from '@warriortrading/ng-golden-layout';
 import * as $ from 'jquery';
 
 

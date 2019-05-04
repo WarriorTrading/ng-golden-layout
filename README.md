@@ -1,7 +1,7 @@
-# ng6-golden-layout
+# ng-golden-layout
 
-[![Downloads](https://img.shields.io/npm/dm/@embedded-enterprises/ng6-golden-layout.svg)](https://www.npmjs.com/package/@embedded-enterprises/ng6-golden-layout) [![NPM Version](https://img.shields.io/npm/v/@embedded-enterprises/ng6-golden-layout.svg)](https://www.npmjs.com/package/@embedded-enterprises/ng6-golden-layout)
-[![NPM Size](https://img.shields.io/bundlephobia/min/@embedded-enterprises/ng6-golden-layout.svg)](https://www.npmjs.com/package/@embedded-enterprises/ng6-golden-layout) [![Liberapay](https://img.shields.io/liberapay/receives/embeddedenterprises.svg?logo=liberapay)](https://liberapay.com/EmbeddedEnterprises/donate)
+[![Downloads](https://img.shields.io/npm/dm/@warriortrading/ng-golden-layout.svg)](https://www.npmjs.com/package/@warriortrading/ng-golden-layout) [![NPM Version](https://img.shields.io/npm/v/@warriortrading/ng-golden-layout.svg)](https://www.npmjs.com/package/@warriortrading/ng-golden-layout)
+[![NPM Size](https://img.shields.io/bundlephobia/min/@warriortrading/ng-golden-layout.svg)](https://www.npmjs.com/package/@warriortrading/ng-golden-layout) [![Liberapay](https://img.shields.io/liberapay/receives/embeddedenterprises.svg?logo=liberapay)](https://liberapay.com/EmbeddedEnterprises/donate)
 
 This project aims to provide a complete solution for embedding golden-layout within an angular 6 application.
 
@@ -12,7 +12,7 @@ Thanks to the awesome people at [<img alt="BrowserStack" width="200" src="bs-log
 Install via npm:
 
 ```sh
-$ npm install --save @embedded-enterprises/ng6-golden-layout
+$ npm install --save @warriortrading/ng-golden-layout
 ```
 
 A manual install of package dependencies will be necessary, too
@@ -24,7 +24,7 @@ $ npm install --save-dev @types/jquery
 
 Importing and configuration:
 ```ts
-import { GoldenLayoutModule, GoldenLayoutConfiguration } from '@embedded-enterprises/ng6-golden-layout';
+import { GoldenLayoutModule, GoldenLayoutConfiguration } from '@warriortrading/ng-golden-layout';
 import * as $ from 'jquery';
 
 // It is required to have JQuery as global in the window object.
@@ -80,7 +80,7 @@ To use services across multiple windows, you need to initialize the multi-window
 
 ```ts
 // in main.ts
-import { MultiWindowInit } from '@embedded-enterprises/ng6-golden-layout';
+import { MultiWindowInit } from '@warriortrading/ng-golden-layout';
 
 // call MultiWindowInit before bootstrapModule().
 MultiWindowInit();

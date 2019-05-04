@@ -7,7 +7,7 @@ import {
   GoldenLayoutService,
   GoldenLayoutConfiguration,
   MultiWindowService,
-} from '@embedded-enterprises/ng6-golden-layout';
+} from '@warriortrading/ng-golden-layout';
 import { RoomlistComponent } from './roomlist/roomlist.component';
 import { RoomComponent } from './room/room.component';
 
