@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  GoldenLayoutService,
+} from '@warriortrading/ng-golden-layout';
 
 @Component({
   selector: 'app-room',
@@ -7,12 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RoomComponent implements OnInit {
   createdTime: Date;
-  constructor() {
+  constructor(private srv: GoldenLayoutService) {
     this.createdTime = new Date()
   }
 
   ngOnInit() {
     console.info(`Room inited at ${this.createdTime}`)
+    let item = this.srv.newestItem('component', 'room-');
+    if (item != null) {
+      console.debug('My id is', item.config.id, ', name is', item.config.title)
+    }
   }
 
   ngOnDestroy() {

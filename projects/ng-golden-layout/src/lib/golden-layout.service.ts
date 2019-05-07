@@ -95,14 +95,52 @@ export class GoldenLayoutService {
     return null;
   }
 
-  public childOfRoot(): GoldenLayout.ContentItem {
+  public root(): GoldenLayout.ContentItem {
     if (this._layout == null || this._layout.root == null ) {
       throw new Error("no root in layout");
     }
-    if (this._layout.root.contentItems == null || this._layout.root.contentItems.length === 0) {
+
+    return this._layout.root;
+  }
+
+  public childOfRoot(): GoldenLayout.ContentItem {
+    let r = this.root();
+    if (r.contentItems == null || r.contentItems.length === 0) {
       throw new Error("no child in root ");
     }
-    return this._layout.root.contentItems[0];
+    return r.contentItems[0];
+  }
+
+  private _filterItems(ci: GoldenLayout.ContentItem, filter: (item: GoldenLayout.ContentItem) => boolean) : GoldenLayout.ContentItem[] {
+    let result: GoldenLayout.ContentItem[] = [];
+    if (filter(ci)) {
+      result.push(ci)
+    } else if (ci.contentItems != null && ci.contentItems.length > 0){
+      ci.contentItems.forEach(item => {
+        if (filter(item)) {
+          result.push(item)
+        } else {
+          let _result = this._filterItems(item, filter)
+          if (_result.length > 0) {
+            result.push(..._result);
+          }
+        }
+      });
+    }
+
+    return result;
+  }
+
+  public filterItems(filter: (item: GoldenLayout.ContentItem) => boolean) : GoldenLayout.ContentItem[] {
+    return this._filterItems(this.root(), filter);
+  }
+
+  public newestItem(t: string, prefix: string): GoldenLayout.ContentItem | null {
+    let items = this.filterItems(item => {
+      return (item.type === t && ((typeof item.config.id === 'string') ? item.config.id : item.config.id[0]).startsWith(prefix));
+    })
+
+    return (items.length > 0) ? items[items.length - 1] : null;
   }
 
   public addStack(parent: GoldenLayout.ContentItem, opt?: GoldenLayout.ItemConfig): GoldenLayout.ContentItem {

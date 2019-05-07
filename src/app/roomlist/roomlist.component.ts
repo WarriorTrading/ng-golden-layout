@@ -30,6 +30,12 @@ export class RoomlistComponent implements OnInit {
   }
 
   ngOnInit() {
+    let items = this.srv.filterItems(item => {
+      return (item.type === 'component' && item.hasId('component-roomlist'))
+    })
+    if (items.length > 0) {
+      console.debug('My id is', items[items.length - 1].config.id, ', name is', items[items.length - 1].config.title)
+    }
   }
 
 }
