@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import {
-  GoldenLayoutModule,
   GoldenLayoutService,
-  GoldenLayoutConfiguration,
-  MultiWindowService,
 } from '@warriortrading/ng-golden-layout';
-
-import { RoomComponent } from '../room/room.component';
 
 @Component({
   selector: 'app-roomlist',
@@ -32,10 +27,6 @@ export class RoomlistComponent implements OnInit {
 
     const stack = this.srv.addStack(this.srv.childOfRoot(), stackOpt);
     this.srv.addComponent(stack, this.srv.getRegisteredComponent('room'), componentOpt);
-  }
-
-  debugGL() {
-    console.log(this.srv.currentConfig());
   }
 
   ngOnInit() {

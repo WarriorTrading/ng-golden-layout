@@ -19,6 +19,9 @@ export declare class GoldenLayoutService {
     initialize(goldenLayout: GoldenLayout, componentInitCallbackFactory: ComponentInitCallbackFactory): void;
     private _saveState;
     getState(): Promise<any>;
+    isInited(): boolean;
+    waitForInited(timeoutInSeconds: number): Promise<boolean>;
+    private delay;
     getRegisteredComponents(): ComponentConfiguration[];
     getRegisteredComponent(name: string): ComponentConfiguration;
     childOfRoot(): GoldenLayout.ContentItem;

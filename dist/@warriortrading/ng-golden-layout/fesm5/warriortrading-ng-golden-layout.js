@@ -1,7 +1,7 @@
 import * as GoldenLayout from 'golden-layout';
 import { InjectionToken, Inject, Injectable, Optional, isDevMode, ComponentFactoryResolver, HostListener, ViewContainerRef, Component, ApplicationRef, NgZone, Injector, ViewChild, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { __spread, __values } from 'tslib';
+import { __spread, __awaiter, __generator, __values } from 'tslib';
 
 /**
  * @fileoverview added by tsickle
@@ -133,6 +133,71 @@ var GoldenLayoutService = /** @class */ (function () {
     /**
      * @return {?}
      */
+    GoldenLayoutService.prototype.isInited = /**
+     * @return {?}
+     */
+    function () {
+        return this._layout != null && this._layout.isInitialised;
+    };
+    /**
+     * @param {?} timeoutInSeconds
+     * @return {?}
+     */
+    GoldenLayoutService.prototype.waitForInited = /**
+     * @param {?} timeoutInSeconds
+     * @return {?}
+     */
+    function (timeoutInSeconds) {
+        return __awaiter(this, void 0, void 0, function () {
+            var nms, times, index;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        nms = 10;
+                        times = Math.floor(timeoutInSeconds * 1000 / nms);
+                        times = (times < 1) ? 1 : times;
+                        index = 0;
+                        _a.label = 1;
+                    case 1:
+                        if (!(index < times)) return [3 /*break*/, 4];
+                        if (this.isInited()) {
+                            return [2 /*return*/, true];
+                        }
+                        return [4 /*yield*/, this.delay(nms)];
+                    case 2:
+                        _a.sent();
+                        _a.label = 3;
+                    case 3:
+                        index++;
+                        return [3 /*break*/, 1];
+                    case 4: return [2 /*return*/, false];
+                }
+            });
+        });
+    };
+    /**
+     * @param {?} ms
+     * @return {?}
+     */
+    GoldenLayoutService.prototype.delay = /**
+     * @param {?} ms
+     * @return {?}
+     */
+    function (ms) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, new Promise(function (resolve) { return setTimeout(resolve, ms); })];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    /**
+     * @return {?}
+     */
     GoldenLayoutService.prototype.getRegisteredComponents = /**
      * @return {?}
      */
@@ -164,7 +229,10 @@ var GoldenLayoutService = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        if (this._layout == null || this._layout.root == null || this._layout.root.contentItems == null || this._layout.root.contentItems.length === 0) {
+        if (this._layout == null || this._layout.root == null) {
+            throw new Error("no root in layout");
+        }
+        if (this._layout.root.contentItems == null || this._layout.root.contentItems.length === 0) {
             throw new Error("no child in root ");
         }
         return this._layout.root.contentItems[0];

@@ -10,9 +10,11 @@ import {
 } from '@warriortrading/ng-golden-layout';
 import { RoomlistComponent } from './roomlist/roomlist.component';
 import { RoomComponent } from './room/room.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 @Component({
-  template: `<div class="spawn-new"></div><golden-layout-root></golden-layout-root>`,
+  template: `<app-welcome></app-welcome>
+  <golden-layout-root></golden-layout-root>`,
   selector: `app-root`,
 })
 export class RootComponent {
@@ -37,12 +39,12 @@ const config: GoldenLayoutConfiguration = {
         type: "row",
         isClosable: false,
         content: [
-          {
-            type: 'component',
-            componentName: 'roomlist',
-            id: "app-roomlist",
-            title: 'roomlist'
-          }
+          // {
+          //   type: 'component',
+          //   componentName: 'roomlist',
+          //   id: "app-roomlist",
+          //   title: 'roomlist'
+          // }
         ]
       }
     ]
@@ -50,7 +52,7 @@ const config: GoldenLayoutConfiguration = {
 }
 
 @NgModule({
-  declarations: [RootComponent, RoomlistComponent, RoomComponent],
+  declarations: [RootComponent, RoomlistComponent, RoomComponent, WelcomeComponent],
   entryComponents: [RoomlistComponent, RoomComponent],
   imports: [
     BrowserModule,
@@ -60,4 +62,5 @@ const config: GoldenLayoutConfiguration = {
   providers: [GoldenLayoutService],
   bootstrap: [RootComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

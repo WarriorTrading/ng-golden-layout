@@ -1,8 +1,9 @@
 import { Inject, Injectable, Type, Optional } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, timer } from 'rxjs';
 import * as GoldenLayout from 'golden-layout';
 import { GoldenLayoutConfiguration, ComponentConfiguration } from './config';
 import { GoldenLayoutStateStore, StateStore, LocalStorageStateStore } from './state';
+import { setInterval } from 'timers';
 
 /**
  * golden-layout component initialization callback type.
@@ -56,6 +57,30 @@ export class GoldenLayoutService {
     return Promise.resolve(this.config.defaultLayout);
   }
 
+  public isInited(): boolean {
+    return this._layout != null && this._layout.isInitialised;
+  }
+
+  public async waitForInited(timeoutInSeconds: number) {
+    let nms = 10;
+    let times = Math.floor(timeoutInSeconds * 1000 / nms);
+    times = (times < 1) ? 1 : times;
+
+    for (let index = 0; index < times; index++) {
+      if (this.isInited()) {
+        return true;
+      }
+
+      await this.delay(nms)
+    }
+
+    return false;
+  }
+
+  private async delay(ms: number) {
+    await new Promise( resolve => setTimeout(resolve, ms) );
+  }
+
   public getRegisteredComponents(): ComponentConfiguration[] {
     return this.config.components;
   }
@@ -71,7 +96,10 @@ export class GoldenLayoutService {
   }
 
   public childOfRoot(): GoldenLayout.ContentItem {
-    if (this._layout == null || this._layout.root == null || this._layout.root.contentItems == null || this._layout.root.contentItems.length === 0) {
+    if (this._layout == null || this._layout.root == null ) {
+      throw new Error("no root in layout");
+    }
+    if (this._layout.root.contentItems == null || this._layout.root.contentItems.length === 0) {
       throw new Error("no child in root ");
     }
     return this._layout.root.contentItems[0];

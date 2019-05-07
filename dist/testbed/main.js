@@ -25,8 +25,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MultiWindowService", function() { return MultiWindowService; });
 /* harmony import */ var golden_layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! golden-layout */ "./node_modules/golden-layout/dist/goldenlayout.js");
 /* harmony import */ var golden_layout__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(golden_layout__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+
 
 
 
@@ -37,14 +39,14 @@ __webpack_require__.r(__webpack_exports__);
  */
 // WARNING: interface has both a type and a value, skipping emit
 /** @type {?} */
-const GoldenLayoutConfiguration = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["InjectionToken"]('GoldenLayoutConfiguration');
+const GoldenLayoutConfiguration = new _angular_core__WEBPACK_IMPORTED_MODULE_2__["InjectionToken"]('GoldenLayoutConfiguration');
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /** @type {?} */
-const GoldenLayoutStateStore = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["InjectionToken"]('GoldenLayoutStateStore');
+const GoldenLayoutStateStore = new _angular_core__WEBPACK_IMPORTED_MODULE_2__["InjectionToken"]('GoldenLayoutStateStore');
 /** @type {?} */
 const DEFAULT_LOCAL_STORAGE_STATE_STORE_KEY = '$ng-golden-layout-state';
 class LocalStorageStateStore {
@@ -146,6 +148,41 @@ class GoldenLayoutService {
     /**
      * @return {?}
      */
+    isInited() {
+        return this._layout != null && this._layout.isInitialised;
+    }
+    /**
+     * @param {?} timeoutInSeconds
+     * @return {?}
+     */
+    waitForInited(timeoutInSeconds) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__awaiter"])(this, void 0, void 0, function* () {
+            /** @type {?} */
+            let nms = 10;
+            /** @type {?} */
+            let times = Math.floor(timeoutInSeconds * 1000 / nms);
+            times = (times < 1) ? 1 : times;
+            for (let index = 0; index < times; index++) {
+                if (this.isInited()) {
+                    return true;
+                }
+                yield this.delay(nms);
+            }
+            return false;
+        });
+    }
+    /**
+     * @param {?} ms
+     * @return {?}
+     */
+    delay(ms) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__awaiter"])(this, void 0, void 0, function* () {
+            yield new Promise(resolve => setTimeout(resolve, ms));
+        });
+    }
+    /**
+     * @return {?}
+     */
     getRegisteredComponents() {
         return this.config.components;
     }
@@ -167,7 +204,10 @@ class GoldenLayoutService {
      * @return {?}
      */
     childOfRoot() {
-        if (this._layout == null || this._layout.root == null || this._layout.root.contentItems == null || this._layout.root.contentItems.length === 0) {
+        if (this._layout == null || this._layout.root == null) {
+            throw new Error("no root in layout");
+        }
+        if (this._layout.root.contentItems == null || this._layout.root.contentItems.length === 0) {
             throw new Error("no child in root ");
         }
         return this._layout.root.contentItems[0];
@@ -229,12 +269,12 @@ class GoldenLayoutService {
     }
 }
 GoldenLayoutService.decorators = [
-    { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"] }
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"] }
 ];
 /** @nocollapse */
 GoldenLayoutService.ctorParameters = () => [
-    { type: GoldenLayoutConfiguration, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"], args: [GoldenLayoutConfiguration,] }] },
-    { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Optional"] }, { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"], args: [GoldenLayoutStateStore,] }] }
+    { type: GoldenLayoutConfiguration, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Inject"], args: [GoldenLayoutConfiguration,] }] },
+    { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Optional"] }, { type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Inject"], args: [GoldenLayoutStateStore,] }] }
 ];
 
 /**
@@ -242,9 +282,9 @@ GoldenLayoutService.ctorParameters = () => [
  * @suppress {checkTypes,extraRequire,missingReturn,uselessCode} checked by tsc
  */
 /** @type {?} */
-const GoldenLayoutContainer = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["InjectionToken"]('GoldenLayoutContainer');
+const GoldenLayoutContainer = new _angular_core__WEBPACK_IMPORTED_MODULE_2__["InjectionToken"]('GoldenLayoutContainer');
 /** @type {?} */
-const GoldenLayoutComponentState = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["InjectionToken"]('GoldenLayoutComponentState');
+const GoldenLayoutComponentState = new _angular_core__WEBPACK_IMPORTED_MODULE_2__["InjectionToken"]('GoldenLayoutComponentState');
 /**
  * Type guard which determines if a component implements the GlOnResize interface.
  * @param {?} obj
@@ -301,14 +341,14 @@ class GoldenLayoutComponent {
             ((/** @type {?} */ (console))).__log = console.log;
             console.log = this.topWindow.console.log;
         }
-        if (Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["isDevMode"])())
+        if (Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["isDevMode"])())
             console.log(`Create@${this.isChildWindow ? 'child' : 'root'}!`);
     }
     /**
      * @return {?}
      */
     ngOnInit() {
-        if (Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["isDevMode"])())
+        if (Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["isDevMode"])())
             console.log(`Init@${this.isChildWindow ? 'child' : 'root'}!`);
         /** @type {?} */
         let anyWin = (/** @type {?} */ (this.topWindow));
@@ -332,7 +372,7 @@ class GoldenLayoutComponent {
      * @return {?}
      */
     ngOnDestroy() {
-        if (Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["isDevMode"])())
+        if (Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["isDevMode"])())
             console.log(`Destroy@${this.isChildWindow ? 'child' : 'root'}!`);
         if (this.isChildWindow) {
             console.log = ((/** @type {?} */ (console))).__log;
@@ -348,7 +388,7 @@ class GoldenLayoutComponent {
      * @return {?}
      */
     unloadHandler() {
-        if (Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["isDevMode"])())
+        if (Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["isDevMode"])())
             console.log(`Unload@${this.isChildWindow ? 'child' : 'root'}`);
         if (this.unloaded) {
             return;
@@ -416,7 +456,7 @@ class GoldenLayoutComponent {
      * @return {?}
      */
     _createComponentInjector(container, componentState) {
-        return _angular_core__WEBPACK_IMPORTED_MODULE_1__["Injector"].create([
+        return _angular_core__WEBPACK_IMPORTED_MODULE_2__["Injector"].create([
             {
                 provide: GoldenLayoutContainer,
                 useValue: container
@@ -461,7 +501,7 @@ class GoldenLayoutComponent {
     }
 }
 GoldenLayoutComponent.decorators = [
-    { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"], args: [{
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"], args: [{
                 selector: 'golden-layout-root',
                 template: `<div class="ng-golden-layout-root" #glroot></div>`,
                 styles: [`
@@ -474,16 +514,16 @@ GoldenLayoutComponent.decorators = [
 /** @nocollapse */
 GoldenLayoutComponent.ctorParameters = () => [
     { type: GoldenLayoutService },
-    { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewContainerRef"] },
-    { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ApplicationRef"] },
-    { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ComponentFactoryResolver"] },
-    { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["NgZone"] },
-    { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Injector"] }
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewContainerRef"] },
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ApplicationRef"] },
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ComponentFactoryResolver"] },
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["NgZone"] },
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Injector"] }
 ];
 GoldenLayoutComponent.propDecorators = {
-    el: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"], args: ['glroot',] }],
-    unloadHandler: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"], args: ['window:beforeunload',] }],
-    onResize: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"], args: ['window:resize', ['$event'],] }]
+    el: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['glroot',] }],
+    unloadHandler: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["HostListener"], args: ['window:beforeunload',] }],
+    onResize: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["HostListener"], args: ['window:resize', ['$event'],] }]
 };
 
 /**
@@ -511,10 +551,10 @@ class GoldenLayoutModule {
     }
 }
 GoldenLayoutModule.decorators = [
-    { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"], args: [{
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"], args: [{
                 declarations: [GoldenLayoutComponent],
                 exports: [GoldenLayoutComponent],
-                imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"]]
+                imports: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["CommonModule"]]
             },] }
 ];
 
@@ -610,6 +650,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _warriortrading_ng_golden_layout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @warriortrading/ng-golden-layout */ "./dist/@warriortrading/ng-golden-layout/fesm2015/warriortrading-ng-golden-layout.js");
 /* harmony import */ var _roomlist_roomlist_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./roomlist/roomlist.component */ "./src/app/roomlist/roomlist.component.ts");
 /* harmony import */ var _room_room_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./room/room.component */ "./src/app/room/room.component.ts");
+/* harmony import */ var _welcome_welcome_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./welcome/welcome.component */ "./src/app/welcome/welcome.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -625,13 +666,15 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 let RootComponent = class RootComponent {
     constructor() {
     }
 };
 RootComponent = __decorate([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
-        template: `<div class="spawn-new"></div><golden-layout-root></golden-layout-root>`,
+        template: `<app-welcome></app-welcome>
+  <golden-layout-root></golden-layout-root>`,
         selector: `app-root`,
     }),
     __metadata("design:paramtypes", [])
@@ -654,12 +697,12 @@ const config = {
                 type: "row",
                 isClosable: false,
                 content: [
-                    {
-                        type: 'component',
-                        componentName: 'roomlist',
-                        id: "app-roomlist",
-                        title: 'roomlist'
-                    }
+                // {
+                //   type: 'component',
+                //   componentName: 'roomlist',
+                //   id: "app-roomlist",
+                //   title: 'roomlist'
+                // }
                 ]
             }
         ]
@@ -669,7 +712,7 @@ let AppModule = class AppModule {
 };
 AppModule = __decorate([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
-        declarations: [RootComponent, _roomlist_roomlist_component__WEBPACK_IMPORTED_MODULE_4__["RoomlistComponent"], _room_room_component__WEBPACK_IMPORTED_MODULE_5__["RoomComponent"]],
+        declarations: [RootComponent, _roomlist_roomlist_component__WEBPACK_IMPORTED_MODULE_4__["RoomlistComponent"], _room_room_component__WEBPACK_IMPORTED_MODULE_5__["RoomComponent"], _welcome_welcome_component__WEBPACK_IMPORTED_MODULE_6__["WelcomeComponent"]],
         entryComponents: [_roomlist_roomlist_component__WEBPACK_IMPORTED_MODULE_4__["RoomlistComponent"], _room_room_component__WEBPACK_IMPORTED_MODULE_5__["RoomComponent"]],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -828,6 +871,94 @@ RoomlistComponent = __decorate([
     }),
     __metadata("design:paramtypes", [_warriortrading_ng_golden_layout__WEBPACK_IMPORTED_MODULE_1__["GoldenLayoutService"]])
 ], RoomlistComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/welcome/welcome.component.html":
+/*!************************************************!*\
+  !*** ./src/app/welcome/welcome.component.html ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"spawn-new\"><div>\n  <ul>\n    <li (click)=\"addRoomList()\">\n      <div>Add Room List</div>\n    </li>\n  </ul>\n  <ul>\n    <li (click)=\"debugGL()\">\n      <div>LogGLConfig</div>\n    </li>\n  </ul>\n</div></div>\n"
+
+/***/ }),
+
+/***/ "./src/app/welcome/welcome.component.scss":
+/*!************************************************!*\
+  !*** ./src/app/welcome/welcome.component.scss ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3dlbGNvbWUvd2VsY29tZS5jb21wb25lbnQuc2NzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/welcome/welcome.component.ts":
+/*!**********************************************!*\
+  !*** ./src/app/welcome/welcome.component.ts ***!
+  \**********************************************/
+/*! exports provided: WelcomeComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WelcomeComponent", function() { return WelcomeComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _warriortrading_ng_golden_layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @warriortrading/ng-golden-layout */ "./dist/@warriortrading/ng-golden-layout/fesm2015/warriortrading-ng-golden-layout.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+let WelcomeComponent = class WelcomeComponent {
+    constructor(srv) {
+        this.srv = srv;
+        console.log("constructor");
+    }
+    ngOnInit() {
+        console.log("ngOnInit");
+        console.log("isInited: ", this.srv.isInited());
+        setTimeout(() => {
+            console.log("isInited: ", this.srv.isInited());
+            this.debugGL();
+        }, 1000);
+    }
+    addRoomList() {
+        const stackOpt = {
+            type: 'stack',
+            id: 'stack-roomlist',
+        };
+        const componentOpt = {
+            type: 'component',
+            id: 'component-roomlist',
+            title: "roomlist"
+        };
+        const stack = this.srv.addStack(this.srv.childOfRoot(), stackOpt);
+        this.srv.addComponent(stack, this.srv.getRegisteredComponent('roomlist'), componentOpt);
+    }
+    debugGL() {
+        console.log(this.srv.currentConfig());
+    }
+};
+WelcomeComponent = __decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+        selector: 'app-welcome',
+        template: __webpack_require__(/*! ./welcome.component.html */ "./src/app/welcome/welcome.component.html"),
+        styles: [__webpack_require__(/*! ./welcome.component.scss */ "./src/app/welcome/welcome.component.scss")]
+    }),
+    __metadata("design:paramtypes", [_warriortrading_ng_golden_layout__WEBPACK_IMPORTED_MODULE_1__["GoldenLayoutService"]])
+], WelcomeComponent);
 
 
 

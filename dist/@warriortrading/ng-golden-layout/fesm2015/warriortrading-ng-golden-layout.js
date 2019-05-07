@@ -1,4 +1,5 @@
 import * as GoldenLayout from 'golden-layout';
+import { __awaiter } from 'tslib';
 import { InjectionToken, Inject, Injectable, Optional, isDevMode, ComponentFactoryResolver, HostListener, ViewContainerRef, Component, ApplicationRef, NgZone, Injector, ViewChild, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -117,6 +118,41 @@ class GoldenLayoutService {
     /**
      * @return {?}
      */
+    isInited() {
+        return this._layout != null && this._layout.isInitialised;
+    }
+    /**
+     * @param {?} timeoutInSeconds
+     * @return {?}
+     */
+    waitForInited(timeoutInSeconds) {
+        return __awaiter(this, void 0, void 0, function* () {
+            /** @type {?} */
+            let nms = 10;
+            /** @type {?} */
+            let times = Math.floor(timeoutInSeconds * 1000 / nms);
+            times = (times < 1) ? 1 : times;
+            for (let index = 0; index < times; index++) {
+                if (this.isInited()) {
+                    return true;
+                }
+                yield this.delay(nms);
+            }
+            return false;
+        });
+    }
+    /**
+     * @param {?} ms
+     * @return {?}
+     */
+    delay(ms) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield new Promise(resolve => setTimeout(resolve, ms));
+        });
+    }
+    /**
+     * @return {?}
+     */
     getRegisteredComponents() {
         return this.config.components;
     }
@@ -138,7 +174,10 @@ class GoldenLayoutService {
      * @return {?}
      */
     childOfRoot() {
-        if (this._layout == null || this._layout.root == null || this._layout.root.contentItems == null || this._layout.root.contentItems.length === 0) {
+        if (this._layout == null || this._layout.root == null) {
+            throw new Error("no root in layout");
+        }
+        if (this._layout.root.contentItems == null || this._layout.root.contentItems.length === 0) {
             throw new Error("no child in root ");
         }
         return this._layout.root.contentItems[0];
