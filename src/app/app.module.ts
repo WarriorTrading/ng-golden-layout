@@ -19,6 +19,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 })
 export class RootComponent {
   constructor() {
+    console.log("RootComponent constructor")
   }
 }
 

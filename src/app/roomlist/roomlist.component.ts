@@ -12,7 +12,9 @@ import {
 
 
 export class RoomlistComponent implements OnInit {
-  constructor(private srv: GoldenLayoutService) { }
+  constructor(private srv: GoldenLayoutService) { 
+    console.log("RoomlistComponent constructor")
+  }
 
   openRoom(roomId: number) {
     const stackOpt = {
@@ -30,6 +32,7 @@ export class RoomlistComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("RoomlistComponent ngOnInit")
     let items = this.srv.filterItems(item => {
       return (item.type === 'component' && item.hasId('component-roomlist'))
     })

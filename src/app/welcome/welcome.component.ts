@@ -12,22 +12,25 @@ import {
 export class WelcomeComponent implements OnInit {
 
   constructor(private srv: GoldenLayoutService) {
-    console.log("constructor")
+    console.log("WelcomeComponent constructor")
    }
 
   ngOnInit() {
-    console.log("ngOnInit")
+    console.log("WelcomeComponent ngOnInit")
+  }
+
+  addRoomList() {
     const ob = from(this.srv.waitForInited(2))
     ob.subscribe(inited => {
       if (inited) {
-        this.addRoomList();
+        this._addRoomList();
       } else {
         console.error("golden layout is not inited in 2 seconds");
       }
     })
   }
 
-  addRoomList() {
+  _addRoomList() {
     const stackOpt = {
       type: 'stack',
       id: 'stack-roomlist',
