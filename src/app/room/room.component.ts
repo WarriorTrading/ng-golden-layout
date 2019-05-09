@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { Message } from '../data/message/message.model';
+import { MessageState } from '../data/message/message.state';
 
 import {
   GoldenLayoutService,
@@ -14,8 +14,8 @@ import {
 })
 export class RoomComponent implements OnInit {
   createdTime: Date;
-  messages$ = this.store.select(state => state.messages )
-  constructor(private srv: GoldenLayoutService, private store: Store<{ messages: Message[] }>) {
+  messages$ = this.store.select(state => state.message.messages )
+  constructor(private srv: GoldenLayoutService, private store: Store<{ message: MessageState }>) {
     console.log("RoomComponent constructor")
     this.createdTime = new Date()
   }

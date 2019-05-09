@@ -45,12 +45,6 @@ const config: GoldenLayoutConfiguration = {
         type: "row",
         isClosable: false,
         content: [
-          // {
-          //   type: 'component',
-          //   componentName: 'roomlist',
-          //   id: "app-roomlist",
-          //   title: 'roomlist'
-          // }
         ]
       }
     ]
@@ -65,7 +59,7 @@ const config: GoldenLayoutConfiguration = {
     BrowserAnimationsModule,
     GoldenLayoutModule.forRoot(config),
     StoreModule.forRoot({}),
-    StoreModule.forFeature('messages', MessageReducer.reducer),
+    StoreModule.forFeature('message', MessageReducer.reducer),
     EffectsModule.forRoot([MessageEffects]),
   ],
   providers: [GoldenLayoutService],
