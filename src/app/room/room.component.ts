@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { from } from 'rxjs';
+import { from, Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Message } from '../data/message/message.model';
+
 import {
   GoldenLayoutService,
 } from '@warriortrading/ng-golden-layout';
@@ -11,7 +14,8 @@ import {
 })
 export class RoomComponent implements OnInit {
   createdTime: Date;
-  constructor(private srv: GoldenLayoutService) {
+  messages$ = this.store.select(state => state.messages )
+  constructor(private srv: GoldenLayoutService, private store: Store<{ messages: Message[] }>) {
     console.log("RoomComponent constructor")
     this.createdTime = new Date()
   }

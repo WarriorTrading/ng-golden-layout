@@ -78096,6 +78096,915 @@ const VERSION = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["Version"]('7.2.1
 
 /***/ }),
 
+/***/ "./node_modules/@ngrx/store/fesm2015/store.js":
+/*!****************************************************!*\
+  !*** ./node_modules/@ngrx/store/fesm2015/store.js ***!
+  \****************************************************/
+/*! exports provided: ɵngrx_modules_store_store_c, ɵngrx_modules_store_store_d, ɵngrx_modules_store_store_e, ɵngrx_modules_store_store_f, ɵngrx_modules_store_store_g, ɵngrx_modules_store_store_b, Store, select, combineReducers, compose, createReducerFactory, ActionsSubject, INIT, ReducerManager, ReducerObservable, ReducerManagerDispatcher, UPDATE, ScannedActionsSubject, createSelector, createSelectorFactory, createFeatureSelector, defaultMemoize, defaultStateFn, resultMemoize, State, StateObservable, reduceState, INITIAL_STATE, _REDUCER_FACTORY, REDUCER_FACTORY, _INITIAL_REDUCERS, INITIAL_REDUCERS, STORE_FEATURES, _INITIAL_STATE, META_REDUCERS, _STORE_REDUCERS, _FEATURE_REDUCERS, FEATURE_REDUCERS, _FEATURE_REDUCERS_TOKEN, StoreModule, StoreRootModule, StoreFeatureModule, _initialStateFactory, _createStoreReducers, _createFeatureReducers */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵngrx_modules_store_store_c", function() { return ACTIONS_SUBJECT_PROVIDERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵngrx_modules_store_store_d", function() { return REDUCER_MANAGER_PROVIDERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵngrx_modules_store_store_e", function() { return SCANNED_ACTIONS_SUBJECT_PROVIDERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵngrx_modules_store_store_f", function() { return isEqualCheck; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵngrx_modules_store_store_g", function() { return STATE_PROVIDERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵngrx_modules_store_store_b", function() { return STORE_PROVIDERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Store", function() { return Store; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "select", function() { return select; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "combineReducers", function() { return combineReducers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "compose", function() { return compose; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createReducerFactory", function() { return createReducerFactory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ActionsSubject", function() { return ActionsSubject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INIT", function() { return INIT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReducerManager", function() { return ReducerManager; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReducerObservable", function() { return ReducerObservable; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReducerManagerDispatcher", function() { return ReducerManagerDispatcher; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE", function() { return UPDATE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ScannedActionsSubject", function() { return ScannedActionsSubject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createSelector", function() { return createSelector; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createSelectorFactory", function() { return createSelectorFactory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createFeatureSelector", function() { return createFeatureSelector; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultMemoize", function() { return defaultMemoize; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultStateFn", function() { return defaultStateFn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resultMemoize", function() { return resultMemoize; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "State", function() { return State; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StateObservable", function() { return StateObservable; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reduceState", function() { return reduceState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INITIAL_STATE", function() { return INITIAL_STATE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_REDUCER_FACTORY", function() { return _REDUCER_FACTORY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REDUCER_FACTORY", function() { return REDUCER_FACTORY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_INITIAL_REDUCERS", function() { return _INITIAL_REDUCERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INITIAL_REDUCERS", function() { return INITIAL_REDUCERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "STORE_FEATURES", function() { return STORE_FEATURES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_INITIAL_STATE", function() { return _INITIAL_STATE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "META_REDUCERS", function() { return META_REDUCERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_STORE_REDUCERS", function() { return _STORE_REDUCERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_FEATURE_REDUCERS", function() { return _FEATURE_REDUCERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FEATURE_REDUCERS", function() { return FEATURE_REDUCERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_FEATURE_REDUCERS_TOKEN", function() { return _FEATURE_REDUCERS_TOKEN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StoreModule", function() { return StoreModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StoreRootModule", function() { return StoreRootModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StoreFeatureModule", function() { return StoreFeatureModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_initialStateFactory", function() { return _initialStateFactory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_createStoreReducers", function() { return _createStoreReducers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_createFeatureReducers", function() { return _createFeatureReducers; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+/**
+ * @license NgRx 6.1.2
+ * (c) 2015-2018 Brandon Roberts, Mike Ryan, Rob Wormald, Victor Savkin
+ * License: MIT
+ */
+
+
+
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+const /** @type {?} */ INIT = /** @type {?} */ ('@ngrx/store/init');
+class ActionsSubject extends rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"] {
+    constructor() {
+        super({ type: INIT });
+    }
+    /**
+     * @param {?} action
+     * @return {?}
+     */
+    next(action) {
+        if (typeof action === 'undefined') {
+            throw new TypeError(`Actions must be objects`);
+        }
+        else if (typeof action.type === 'undefined') {
+            throw new TypeError(`Actions must have a type property`);
+        }
+        super.next(action);
+    }
+    /**
+     * @return {?}
+     */
+    complete() {
+        /* noop */
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        super.complete();
+    }
+}
+ActionsSubject.decorators = [
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"] }
+];
+/** @nocollapse */
+ActionsSubject.ctorParameters = () => [];
+const /** @type {?} */ ACTIONS_SUBJECT_PROVIDERS = [ActionsSubject];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+const /** @type {?} */ _INITIAL_STATE = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["InjectionToken"]('@ngrx/store Internal Initial State');
+const /** @type {?} */ INITIAL_STATE = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["InjectionToken"]('@ngrx/store Initial State');
+const /** @type {?} */ REDUCER_FACTORY = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["InjectionToken"]('@ngrx/store Reducer Factory');
+const /** @type {?} */ _REDUCER_FACTORY = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["InjectionToken"]('@ngrx/store Reducer Factory Provider');
+const /** @type {?} */ INITIAL_REDUCERS = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["InjectionToken"]('@ngrx/store Initial Reducers');
+const /** @type {?} */ _INITIAL_REDUCERS = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["InjectionToken"]('@ngrx/store Internal Initial Reducers');
+const /** @type {?} */ META_REDUCERS = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["InjectionToken"]('@ngrx/store Meta Reducers');
+const /** @type {?} */ STORE_FEATURES = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["InjectionToken"]('@ngrx/store Store Features');
+const /** @type {?} */ _STORE_REDUCERS = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["InjectionToken"]('@ngrx/store Internal Store Reducers');
+const /** @type {?} */ _FEATURE_REDUCERS = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["InjectionToken"]('@ngrx/store Internal Feature Reducers');
+const /** @type {?} */ _FEATURE_REDUCERS_TOKEN = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["InjectionToken"]('@ngrx/store Internal Feature Reducers Token');
+const /** @type {?} */ FEATURE_REDUCERS = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["InjectionToken"]('@ngrx/store Feature Reducers');
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @param {?} reducers
+ * @param {?=} initialState
+ * @return {?}
+ */
+function combineReducers(reducers, initialState = {}) {
+    const /** @type {?} */ reducerKeys = Object.keys(reducers);
+    const /** @type {?} */ finalReducers = {};
+    for (let /** @type {?} */ i = 0; i < reducerKeys.length; i++) {
+        const /** @type {?} */ key = reducerKeys[i];
+        if (typeof reducers[key] === 'function') {
+            finalReducers[key] = reducers[key];
+        }
+    }
+    const /** @type {?} */ finalReducerKeys = Object.keys(finalReducers);
+    return function combination(state, action) {
+        state = state === undefined ? initialState : state;
+        let /** @type {?} */ hasChanged = false;
+        const /** @type {?} */ nextState = {};
+        for (let /** @type {?} */ i = 0; i < finalReducerKeys.length; i++) {
+            const /** @type {?} */ key = finalReducerKeys[i];
+            const /** @type {?} */ reducer = finalReducers[key];
+            const /** @type {?} */ previousStateForKey = state[key];
+            const /** @type {?} */ nextStateForKey = reducer(previousStateForKey, action);
+            nextState[key] = nextStateForKey;
+            hasChanged = hasChanged || nextStateForKey !== previousStateForKey;
+        }
+        return hasChanged ? nextState : state;
+    };
+}
+/**
+ * @template T
+ * @param {?} object
+ * @param {?} keyToRemove
+ * @return {?}
+ */
+function omit(object, keyToRemove) {
+    return Object.keys(object)
+        .filter(key => key !== keyToRemove)
+        .reduce((result, key) => Object.assign(result, { [key]: object[key] }), {});
+}
+/**
+ * @param {...?} functions
+ * @return {?}
+ */
+function compose(...functions) {
+    return function (arg) {
+        if (functions.length === 0) {
+            return arg;
+        }
+        const /** @type {?} */ last = functions[functions.length - 1];
+        const /** @type {?} */ rest = functions.slice(0, -1);
+        return rest.reduceRight((composed, fn) => fn(composed), last(arg));
+    };
+}
+/**
+ * @template T, V
+ * @param {?} reducerFactory
+ * @param {?=} metaReducers
+ * @return {?}
+ */
+function createReducerFactory(reducerFactory, metaReducers) {
+    if (Array.isArray(metaReducers) && metaReducers.length > 0) {
+        return compose.apply(null, [...metaReducers, reducerFactory]);
+    }
+    return reducerFactory;
+}
+/**
+ * @template T, V
+ * @param {?=} metaReducers
+ * @return {?}
+ */
+function createFeatureReducerFactory(metaReducers) {
+    const /** @type {?} */ reducerFactory = Array.isArray(metaReducers) && metaReducers.length > 0
+        ? compose(...metaReducers)
+        : (r) => r;
+    return (reducer, initialState) => {
+        reducer = reducerFactory(reducer);
+        return (state, action) => {
+            state = state === undefined ? initialState : state;
+            return reducer(state, action);
+        };
+    };
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @abstract
+ */
+class ReducerObservable extends rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"] {
+}
+/**
+ * @abstract
+ */
+class ReducerManagerDispatcher extends ActionsSubject {
+}
+const /** @type {?} */ UPDATE = /** @type {?} */ ('@ngrx/store/update-reducers');
+class ReducerManager extends rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"] {
+    /**
+     * @param {?} dispatcher
+     * @param {?} initialState
+     * @param {?} reducers
+     * @param {?} reducerFactory
+     */
+    constructor(dispatcher, initialState, reducers, reducerFactory) {
+        super(reducerFactory(reducers, initialState));
+        this.dispatcher = dispatcher;
+        this.initialState = initialState;
+        this.reducers = reducers;
+        this.reducerFactory = reducerFactory;
+    }
+    /**
+     * @param {?} feature
+     * @return {?}
+     */
+    addFeature(feature) {
+        this.addFeatures([feature]);
+    }
+    /**
+     * @param {?} features
+     * @return {?}
+     */
+    addFeatures(features) {
+        const /** @type {?} */ reducers = features.reduce((reducerDict, { reducers, reducerFactory, metaReducers, initialState, key }) => {
+            const /** @type {?} */ reducer = typeof reducers === 'function'
+                ? createFeatureReducerFactory(metaReducers)(reducers, initialState)
+                : createReducerFactory(reducerFactory, metaReducers)(reducers, initialState);
+            reducerDict[key] = reducer;
+            return reducerDict;
+        }, /** @type {?} */ ({}));
+        this.addReducers(reducers);
+    }
+    /**
+     * @param {?} feature
+     * @return {?}
+     */
+    removeFeature(feature) {
+        this.removeFeatures([feature]);
+    }
+    /**
+     * @param {?} features
+     * @return {?}
+     */
+    removeFeatures(features) {
+        this.removeReducers(features.map(p => p.key));
+    }
+    /**
+     * @param {?} key
+     * @param {?} reducer
+     * @return {?}
+     */
+    addReducer(key, reducer) {
+        this.addReducers({ [key]: reducer });
+    }
+    /**
+     * @param {?} reducers
+     * @return {?}
+     */
+    addReducers(reducers) {
+        this.reducers = Object.assign({}, this.reducers, reducers);
+        this.updateReducers(Object.keys(reducers));
+    }
+    /**
+     * @param {?} featureKey
+     * @return {?}
+     */
+    removeReducer(featureKey) {
+        this.removeReducers([featureKey]);
+    }
+    /**
+     * @param {?} featureKeys
+     * @return {?}
+     */
+    removeReducers(featureKeys) {
+        featureKeys.forEach(key => {
+            this.reducers = /** @type {?} */ (omit(this.reducers, key) /*TODO(#823)*/);
+        });
+        this.updateReducers(featureKeys);
+    }
+    /**
+     * @param {?} featureKeys
+     * @return {?}
+     */
+    updateReducers(featureKeys) {
+        this.next(this.reducerFactory(this.reducers, this.initialState));
+        featureKeys.forEach(feature => {
+            this.dispatcher.next(/** @type {?} */ ({
+                type: UPDATE,
+                feature,
+            }));
+        });
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        this.complete();
+    }
+}
+ReducerManager.decorators = [
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"] }
+];
+/** @nocollapse */
+ReducerManager.ctorParameters = () => [
+    { type: ReducerManagerDispatcher, },
+    { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"], args: [INITIAL_STATE,] },] },
+    { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"], args: [INITIAL_REDUCERS,] },] },
+    { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"], args: [REDUCER_FACTORY,] },] },
+];
+const /** @type {?} */ REDUCER_MANAGER_PROVIDERS = [
+    ReducerManager,
+    { provide: ReducerObservable, useExisting: ReducerManager },
+    { provide: ReducerManagerDispatcher, useExisting: ActionsSubject },
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class ScannedActionsSubject extends rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"] {
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        this.complete();
+    }
+}
+ScannedActionsSubject.decorators = [
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"] }
+];
+const /** @type {?} */ SCANNED_ACTIONS_SUBJECT_PROVIDERS = [
+    ScannedActionsSubject,
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @abstract
+ */
+class StateObservable extends rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"] {
+}
+/**
+ * @template T
+ */
+class State extends rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"] {
+    /**
+     * @param {?} actions$
+     * @param {?} reducer$
+     * @param {?} scannedActions
+     * @param {?} initialState
+     */
+    constructor(actions$, reducer$, scannedActions, initialState) {
+        super(initialState);
+        const /** @type {?} */ actionsOnQueue$ = actions$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["observeOn"])(rxjs__WEBPACK_IMPORTED_MODULE_1__["queueScheduler"]));
+        const /** @type {?} */ withLatestReducer$ = actionsOnQueue$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["withLatestFrom"])(reducer$));
+        const /** @type {?} */ seed = { state: initialState };
+        const /** @type {?} */ stateAndAction$ = withLatestReducer$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["scan"])(reduceState, seed));
+        this.stateSubscription = stateAndAction$.subscribe(({ state, action }) => {
+            this.next(state);
+            scannedActions.next(action);
+        });
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        this.stateSubscription.unsubscribe();
+        this.complete();
+    }
+}
+State.INIT = INIT;
+State.decorators = [
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"] }
+];
+/** @nocollapse */
+State.ctorParameters = () => [
+    { type: ActionsSubject, },
+    { type: ReducerObservable, },
+    { type: ScannedActionsSubject, },
+    { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"], args: [INITIAL_STATE,] },] },
+];
+/**
+ * @template T, V
+ * @param {?=} stateActionPair
+ * @param {?=} __1
+ * @return {?}
+ */
+function reduceState(stateActionPair = { state: undefined }, [action, reducer]) {
+    const { state } = stateActionPair;
+    return { state: reducer(state, action), action };
+}
+const /** @type {?} */ STATE_PROVIDERS = [
+    State,
+    { provide: StateObservable, useExisting: State },
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @template T
+ */
+class Store extends rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"] {
+    /**
+     * @param {?} state$
+     * @param {?} actionsObserver
+     * @param {?} reducerManager
+     */
+    constructor(state$, actionsObserver, reducerManager) {
+        super();
+        this.actionsObserver = actionsObserver;
+        this.reducerManager = reducerManager;
+        this.source = state$;
+    }
+    /**
+     * @template Props
+     * @param {?} pathOrMapFn
+     * @param {...?} paths
+     * @return {?}
+     */
+    select(pathOrMapFn, ...paths) {
+        return select.call(null, pathOrMapFn, ...paths)(this);
+    }
+    /**
+     * @template R
+     * @param {?} operator
+     * @return {?}
+     */
+    lift(operator) {
+        const /** @type {?} */ store = new Store(this, this.actionsObserver, this.reducerManager);
+        store.operator = operator;
+        return store;
+    }
+    /**
+     * @template V
+     * @param {?} action
+     * @return {?}
+     */
+    dispatch(action) {
+        this.actionsObserver.next(action);
+    }
+    /**
+     * @param {?} action
+     * @return {?}
+     */
+    next(action) {
+        this.actionsObserver.next(action);
+    }
+    /**
+     * @param {?} err
+     * @return {?}
+     */
+    error(err) {
+        this.actionsObserver.error(err);
+    }
+    /**
+     * @return {?}
+     */
+    complete() {
+        this.actionsObserver.complete();
+    }
+    /**
+     * @template State, Actions
+     * @param {?} key
+     * @param {?} reducer
+     * @return {?}
+     */
+    addReducer(key, reducer) {
+        this.reducerManager.addReducer(key, reducer);
+    }
+    /**
+     * @template Key
+     * @param {?} key
+     * @return {?}
+     */
+    removeReducer(key) {
+        // TS2.9: keyof T is string|number|symbol, explicitly cast to string to fix.
+        this.reducerManager.removeReducer(/** @type {?} */ (key));
+    }
+}
+Store.decorators = [
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"] }
+];
+/** @nocollapse */
+Store.ctorParameters = () => [
+    { type: StateObservable, },
+    { type: ActionsSubject, },
+    { type: ReducerManager, },
+];
+const /** @type {?} */ STORE_PROVIDERS = [Store];
+/**
+ * @template T, Props, K
+ * @param {?} pathOrMapFn
+ * @param {?} propsOrPath
+ * @param {...?} paths
+ * @return {?}
+ */
+function select(pathOrMapFn, propsOrPath, ...paths) {
+    return function selectOperator(source$) {
+        let /** @type {?} */ mapped$;
+        if (typeof pathOrMapFn === 'string') {
+            const /** @type {?} */ pathSlices = [/** @type {?} */ (propsOrPath), ...paths].filter(Boolean);
+            mapped$ = source$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["pluck"])(pathOrMapFn, ...pathSlices));
+        }
+        else if (typeof pathOrMapFn === 'function') {
+            mapped$ = source$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(source => pathOrMapFn(source, /** @type {?} */ (propsOrPath))));
+        }
+        else {
+            throw new TypeError(`Unexpected type '${typeof pathOrMapFn}' in select operator,` +
+                ` expected 'string' or 'function'`);
+        }
+        return mapped$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["distinctUntilChanged"])());
+    };
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @param {?} a
+ * @param {?} b
+ * @return {?}
+ */
+function isEqualCheck(a, b) {
+    return a === b;
+}
+/**
+ * @param {?} args
+ * @param {?} lastArguments
+ * @param {?} comparator
+ * @return {?}
+ */
+function isArgumentsChanged(args, lastArguments, comparator) {
+    for (let /** @type {?} */ i = 0; i < args.length; i++) {
+        if (!comparator(args[i], lastArguments[i])) {
+            return true;
+        }
+    }
+    return false;
+}
+/**
+ * @param {?} projectionFn
+ * @param {?} isResultEqual
+ * @return {?}
+ */
+function resultMemoize(projectionFn, isResultEqual) {
+    return defaultMemoize(projectionFn, isEqualCheck, isResultEqual);
+}
+/**
+ * @param {?} projectionFn
+ * @param {?=} isArgumentsEqual
+ * @param {?=} isResultEqual
+ * @return {?}
+ */
+function defaultMemoize(projectionFn, isArgumentsEqual = isEqualCheck, isResultEqual = isEqualCheck) {
+    let /** @type {?} */ lastArguments = null;
+    // tslint:disable-next-line:no-any anything could be the result.
+    let /** @type {?} */ lastResult = null;
+    /**
+     * @return {?}
+     */
+    function reset() {
+        lastArguments = null;
+        lastResult = null;
+    }
+    /**
+     * @return {?}
+     */
+    function memoized() {
+        if (!lastArguments) {
+            lastResult = projectionFn.apply(null, arguments);
+            lastArguments = arguments;
+            return lastResult;
+        }
+        if (!isArgumentsChanged(arguments, lastArguments, isArgumentsEqual)) {
+            return lastResult;
+        }
+        const /** @type {?} */ newResult = projectionFn.apply(null, arguments);
+        if (isResultEqual(lastResult, newResult)) {
+            return lastResult;
+        }
+        lastResult = newResult;
+        lastArguments = arguments;
+        return newResult;
+    }
+    return { memoized, reset };
+}
+/**
+ * @param {...?} input
+ * @return {?}
+ */
+function createSelector(...input) {
+    return createSelectorFactory(defaultMemoize)(...input);
+}
+/**
+ * @param {?} state
+ * @param {?} selectors
+ * @param {?} props
+ * @param {?} memoizedProjector
+ * @return {?}
+ */
+function defaultStateFn(state, selectors, props, memoizedProjector) {
+    if (props === undefined) {
+        const /** @type {?} */ args = (/** @type {?} */ (selectors)).map(fn => fn(state));
+        return memoizedProjector.memoized.apply(null, args);
+    }
+    const /** @type {?} */ args = (/** @type {?} */ (selectors)).map(fn => fn(state, props));
+    return memoizedProjector.memoized.apply(null, [...args, props]);
+}
+/**
+ * @param {?} memoize
+ * @param {?=} options
+ * @return {?}
+ */
+function createSelectorFactory(memoize, options = {
+    stateFn: defaultStateFn,
+}) {
+    return function (...input) {
+        let /** @type {?} */ args = input;
+        if (Array.isArray(args[0])) {
+            const [head, ...tail] = args;
+            args = [...head, ...tail];
+        }
+        const /** @type {?} */ selectors = args.slice(0, args.length - 1);
+        const /** @type {?} */ projector = args[args.length - 1];
+        const /** @type {?} */ memoizedSelectors = selectors.filter((selector) => selector.release && typeof selector.release === 'function');
+        const /** @type {?} */ memoizedProjector = memoize(function (...selectors) {
+            return projector.apply(null, selectors);
+        });
+        const /** @type {?} */ memoizedState = defaultMemoize(function (state, props) {
+            // createSelector works directly on state
+            // e.g. createSelector((state, props) => ...)
+            if (selectors.length === 0) {
+                return projector.apply(null, [state, props]);
+            }
+            return options.stateFn.apply(null, [
+                state,
+                selectors,
+                props,
+                memoizedProjector,
+            ]);
+        });
+        /**
+         * @return {?}
+         */
+        function release() {
+            memoizedState.reset();
+            memoizedProjector.reset();
+            memoizedSelectors.forEach(selector => selector.release());
+        }
+        return Object.assign(memoizedState.memoized, {
+            release,
+            projector: memoizedProjector.memoized,
+        });
+    };
+}
+/**
+ * @param {?} featureName
+ * @return {?}
+ */
+function createFeatureSelector(featureName) {
+    return createSelector((state) => state[featureName], (featureState) => featureState);
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+class StoreRootModule {
+    /**
+     * @param {?} actions$
+     * @param {?} reducer$
+     * @param {?} scannedActions$
+     * @param {?} store
+     */
+    constructor(actions$, reducer$, scannedActions$, store) { }
+}
+StoreRootModule.decorators = [
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"], args: [{},] }
+];
+/** @nocollapse */
+StoreRootModule.ctorParameters = () => [
+    { type: ActionsSubject, },
+    { type: ReducerObservable, },
+    { type: ScannedActionsSubject, },
+    { type: Store, },
+];
+class StoreFeatureModule {
+    /**
+     * @param {?} features
+     * @param {?} featureReducers
+     * @param {?} reducerManager
+     * @param {?} root
+     */
+    constructor(features, featureReducers, reducerManager, root) {
+        this.features = features;
+        this.featureReducers = featureReducers;
+        this.reducerManager = reducerManager;
+        const /** @type {?} */ feats = features.map((feature, index) => {
+            const /** @type {?} */ featureReducerCollection = featureReducers.shift();
+            const /** @type {?} */ reducers = /** @type {?} */ ((featureReducerCollection))[index];
+            return Object.assign({}, feature, { reducers, initialState: _initialStateFactory(feature.initialState) });
+        });
+        reducerManager.addFeatures(feats);
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        this.reducerManager.removeFeatures(this.features);
+    }
+}
+StoreFeatureModule.decorators = [
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"], args: [{},] }
+];
+/** @nocollapse */
+StoreFeatureModule.ctorParameters = () => [
+    { type: Array, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"], args: [STORE_FEATURES,] },] },
+    { type: Array, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"], args: [FEATURE_REDUCERS,] },] },
+    { type: ReducerManager, },
+    { type: StoreRootModule, },
+];
+class StoreModule {
+    /**
+     * @param {?} reducers
+     * @param {?=} config
+     * @return {?}
+     */
+    static forRoot(reducers, config = {}) {
+        return {
+            ngModule: StoreRootModule,
+            providers: [
+                { provide: _INITIAL_STATE, useValue: config.initialState },
+                {
+                    provide: INITIAL_STATE,
+                    useFactory: _initialStateFactory,
+                    deps: [_INITIAL_STATE],
+                },
+                { provide: _INITIAL_REDUCERS, useValue: reducers },
+                {
+                    provide: _STORE_REDUCERS,
+                    useExisting: reducers instanceof _angular_core__WEBPACK_IMPORTED_MODULE_0__["InjectionToken"] ? reducers : _INITIAL_REDUCERS,
+                },
+                {
+                    provide: INITIAL_REDUCERS,
+                    deps: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injector"], _INITIAL_REDUCERS, [new _angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"](_STORE_REDUCERS)]],
+                    useFactory: _createStoreReducers,
+                },
+                {
+                    provide: META_REDUCERS,
+                    useValue: config.metaReducers ? config.metaReducers : [],
+                },
+                {
+                    provide: _REDUCER_FACTORY,
+                    useValue: config.reducerFactory
+                        ? config.reducerFactory
+                        : combineReducers,
+                },
+                {
+                    provide: REDUCER_FACTORY,
+                    deps: [_REDUCER_FACTORY, META_REDUCERS],
+                    useFactory: createReducerFactory,
+                },
+                ACTIONS_SUBJECT_PROVIDERS,
+                REDUCER_MANAGER_PROVIDERS,
+                SCANNED_ACTIONS_SUBJECT_PROVIDERS,
+                STATE_PROVIDERS,
+                STORE_PROVIDERS,
+            ],
+        };
+    }
+    /**
+     * @param {?} featureName
+     * @param {?} reducers
+     * @param {?=} config
+     * @return {?}
+     */
+    static forFeature(featureName, reducers, config = {}) {
+        return {
+            ngModule: StoreFeatureModule,
+            providers: [
+                {
+                    provide: STORE_FEATURES,
+                    multi: true,
+                    useValue: /** @type {?} */ ({
+                        key: featureName,
+                        reducerFactory: config.reducerFactory
+                            ? config.reducerFactory
+                            : combineReducers,
+                        metaReducers: config.metaReducers ? config.metaReducers : [],
+                        initialState: config.initialState,
+                    }),
+                },
+                { provide: _FEATURE_REDUCERS, multi: true, useValue: reducers },
+                {
+                    provide: _FEATURE_REDUCERS_TOKEN,
+                    multi: true,
+                    useExisting: reducers instanceof _angular_core__WEBPACK_IMPORTED_MODULE_0__["InjectionToken"] ? reducers : _FEATURE_REDUCERS,
+                },
+                {
+                    provide: FEATURE_REDUCERS,
+                    multi: true,
+                    deps: [
+                        _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injector"],
+                        _FEATURE_REDUCERS,
+                        [new _angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"](_FEATURE_REDUCERS_TOKEN)],
+                    ],
+                    useFactory: _createFeatureReducers,
+                },
+            ],
+        };
+    }
+}
+StoreModule.decorators = [
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"], args: [{},] }
+];
+/**
+ * @param {?} injector
+ * @param {?} reducers
+ * @param {?} tokenReducers
+ * @return {?}
+ */
+function _createStoreReducers(injector, reducers, tokenReducers) {
+    return reducers instanceof _angular_core__WEBPACK_IMPORTED_MODULE_0__["InjectionToken"] ? injector.get(reducers) : reducers;
+}
+/**
+ * @param {?} injector
+ * @param {?} reducerCollection
+ * @param {?} tokenReducerCollection
+ * @return {?}
+ */
+function _createFeatureReducers(injector, reducerCollection, tokenReducerCollection) {
+    const /** @type {?} */ reducers = reducerCollection.map((reducer, index) => {
+        return reducer instanceof _angular_core__WEBPACK_IMPORTED_MODULE_0__["InjectionToken"] ? injector.get(reducer) : reducer;
+    });
+    return reducers;
+}
+/**
+ * @param {?} initialState
+ * @return {?}
+ */
+function _initialStateFactory(initialState) {
+    if (typeof initialState === 'function') {
+        return initialState();
+    }
+    return initialState;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+
+/**
+ * Generated bundle index. Do not edit.
+ */
+
+
+//# sourceMappingURL=store.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/golden-layout/dist/goldenlayout.js":
 /*!*********************************************************!*\
   !*** ./node_modules/golden-layout/dist/goldenlayout.js ***!

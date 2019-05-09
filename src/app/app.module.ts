@@ -1,6 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EffectsModule } from '@ngrx/effects';
+import { MessageEffects } from './data/message/message.effects';
+import * as MessageReducer from './data/message/message.reducer';
+
 import { NgModule, Component, Injectable } from '@angular/core';
+import { StoreModule } from '@ngrx/store';
 import * as $ from 'jquery';
 import {
   GoldenLayoutModule,
@@ -59,6 +64,9 @@ const config: GoldenLayoutConfiguration = {
     BrowserModule,
     BrowserAnimationsModule,
     GoldenLayoutModule.forRoot(config),
+    StoreModule.forRoot({}),
+    StoreModule.forFeature('messages', MessageReducer.reducer),
+    EffectsModule.forRoot([MessageEffects]),
   ],
   providers: [GoldenLayoutService],
   bootstrap: [RootComponent]
